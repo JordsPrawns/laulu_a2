@@ -191,7 +191,7 @@ void Laulu_a2AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
             auto shapedSample = floor(wetData[sample] * quantum ) / quantum;
             wetData[sample] = shapedSample;
             
-            channelData[sample] = channelData[sample] * 0.0f + wetData[sample] * 0.25f;
+            channelData[sample] = channelData[sample] * 0.4f + wetData[sample] * 0.6f;
         }
         // ..do something to the data...
     }
