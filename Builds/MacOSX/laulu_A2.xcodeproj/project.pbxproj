@@ -145,6 +145,10 @@
 			isa = PBXBuildFile;
 			fileRef = 11F63D109C4A1F0BDC6F55BD;
 		};
+		25315A674D51DC5F44DAA397 = {
+			isa = PBXBuildFile;
+			fileRef = DA06FDCD56426E5FC43B7C06;
+		};
 		9E3E3C374960AC04743C28E9 = {
 			isa = PBXBuildFile;
 			fileRef = CE07B212FDB48648A17DC962;
@@ -226,6 +230,13 @@
 			lastKnownFileType = file;
 			name = "juce_opengl";
 			path = "/Users/jordanlaulu/Desktop/University Final Year/Software/JUCE/modules/juce_opengl";
+			sourceTree = "<absolute>";
+		};
+		3794F268F70ED33C58DC8064 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_dsp";
+			path = "/Users/jordanlaulu/Desktop/University Final Year/Software/JUCE/modules/juce_dsp";
 			sourceTree = "<absolute>";
 		};
 		3EDFDA7C5173070B32D02F94 = {
@@ -473,6 +484,13 @@
 			path = "../../JuceLibraryCode/include_juce_core.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		DA06FDCD56426E5FC43B7C06 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = "include_juce_dsp.mm";
+			path = "../../JuceLibraryCode/include_juce_dsp.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
 		DA52986E105C9C37ADBFBBC4 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -630,6 +648,7 @@
 				DE3A1EBD080DEEBFE37BDB7F,
 				6615693D78490C0A8FA836F5,
 				1AF57B6B1D5E563F32C4A708,
+				3794F268F70ED33C58DC8064,
 				4536FE24022D7DDC3E9312B6,
 				F964CC1DDC8E5558DC860CE5,
 				88B8F08AFFC5C32D814F31DA,
@@ -658,6 +677,7 @@
 				D59AB3DDDB24D1053C36B7E1,
 				7F9B70428D4D3CEFA737D65A,
 				11F63D109C4A1F0BDC6F55BD,
+				DA06FDCD56426E5FC43B7C06,
 				CE07B212FDB48648A17DC962,
 				985034A19C6E72993A61D2A3,
 				565F6C2598F853F894440A55,
@@ -1483,6 +1503,7 @@
 				2DC4B8BF3D87F733C2C1C309,
 				BB2C58882BFACF6CA5433C34,
 				BCDA6ACA35647E1CC041A703,
+				25315A674D51DC5F44DAA397,
 				9E3E3C374960AC04743C28E9,
 				76C520D3C7404BFF7DE478F1,
 				C162D83A37B53A2F5C7F1420,

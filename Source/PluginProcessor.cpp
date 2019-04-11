@@ -28,10 +28,12 @@ Laulu_a2AudioProcessor::Laulu_a2AudioProcessor()
     currentAngle = 0.0f;
     angleDelta = 0.0f;
     sinFreq = 60.0f;
+    
 }
 
 Laulu_a2AudioProcessor::~Laulu_a2AudioProcessor()
 {
+    
 }
 
 //==============================================================================
@@ -104,7 +106,22 @@ void Laulu_a2AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
     currentSampleRate = sampleRate;
     sinFreq = 60.0f;
     updateAngleDelta();
+    
+    mixLevel = 0.1f;
+    
+    gain.setGainDecibels(0.0f);
+    mixLevel.reset(sampleRate,0.05f);
+    mixLevel.setTargetValue(0.05f);
+    
+    
+    
+    
+    
+
 }
+
+    
+
 
 void Laulu_a2AudioProcessor::releaseResources()
 {
@@ -141,7 +158,8 @@ void Laulu_a2AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
     ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-
+    
+   
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -181,9 +199,11 @@ void Laulu_a2AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
             
             //float modulator = random.nextFloat() * 0.25f - 0.125f;
           //  wetData[sample] = wetData[sample] * modulator;
-           // wetData[sample] = wetData[sample] * (currentSinSample + modulator);
+           //wetData[sample] = wetData[sample] * (currentSinSample + modulator);
+            
             wetData[sample] = wetData[sample] * currentSinSample;
-            //auto shapedSample = (32767 >> 1) * (float) std::atan (16 * wetData[sample]/32767);
+            
+           // auto shapedSample = (32767 >> 1) * (float) std::atan (16 * wetData[sample]/32767);
             
             //per sample
             float quantum = powf( 1.0f, 8);
@@ -191,10 +211,20 @@ void Laulu_a2AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
             auto shapedSample = floor(wetData[sample] * quantum ) / quantum;
             wetData[sample] = shapedSample;
             
-            channelData[sample] = channelData[sample] * 0.4f + wetData[sample] * 0.6f;
+           // channelData[sample] = channelData[sample] * 0.4f + wetData[sample] * 0.6f;
+            
+            channelData[sample] = channelData[sample] * mixLevel .getNextValue();
+            {
+               
+                
+                channelData[sample] = channelData[sample] * freqLevel .getNextValue();
+            }
         }
         // ..do something to the data...
     }
+
+dsp::AudioBlock<float> output(buffer);
+gain.process(dsp::ProcessContextReplacing<float> (output));
 }
 
 //==============================================================================
